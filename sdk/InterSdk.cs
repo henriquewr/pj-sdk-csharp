@@ -122,7 +122,7 @@ namespace Sdk {
             certificates.Import(certificado, senha, X509KeyStorageFlags.PersistKeySet);
             X509Certificate2 cert = certificates[0];
             TimeSpan diff = cert.NotAfter.Subtract(DateTime.Now);
-            if (diff.Days < Constants.DAYS_TO_EXPIRE) {
+            if (diff.TotalDays < Constants.DAYS_TO_EXPIRE) {
                 notAfter = cert.NotAfter;
                 return false;
             }

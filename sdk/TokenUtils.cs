@@ -22,8 +22,8 @@ namespace Sdk {
             bool ok = map.TryGetValue(scopes, out info);
             
             if (ok) {
-                TimeSpan diff = info.t.Subtract(DateTime.Now);
-                if ((info.tok.expires_in - diff.Seconds) < SECONDS_TO_RENEW) {
+                TimeSpan diff = DateTime.Now.Subtract(info.t);
+                if ((info.tok.expires_in - diff.TotalSeconds) < SECONDS_TO_RENEW) {
                     ok = false;
                 }
             }
