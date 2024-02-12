@@ -24,8 +24,7 @@ namespace Sdk
             config = Config.Builder()
                 .SetCertificado(certificado)
                 .SetSenha(senha)
-                .SetClientId(clientId)
-                .SetClientSecret(clientSecret)
+	@@ -28,105 +29,125 @@ public class InterSdk {
                 .SetControleRateLimit(true)
                 .Build();
             Avisos = new List<string>();
