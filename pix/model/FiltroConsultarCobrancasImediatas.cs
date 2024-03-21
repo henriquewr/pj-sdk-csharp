@@ -11,7 +11,7 @@ namespace Sdk.PixApi {
 		[DataMember(Name="cnpj", EmitDefaultValue = false)]
 		public string Cnpj;
 		[DataMember(Name="locationPresente", EmitDefaultValue = false)]
-		public bool LocationPresente;
+		public bool? LocationPresente;
 		[DataMember(Name="status", EmitDefaultValue = false)]
 		public string Status;
 
@@ -33,7 +33,7 @@ namespace Sdk.PixApi {
 			return this;
 		}
 
-		public FiltroConsultarCobrancasImediatas SetLocationPresente(bool locationPresente) {
+		public FiltroConsultarCobrancasImediatas SetLocationPresente(bool? locationPresente) {
 			this.LocationPresente = locationPresente;
 			return this;
 		}

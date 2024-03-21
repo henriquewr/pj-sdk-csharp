@@ -32,8 +32,8 @@ namespace Sdk.PixApi {
 				return "";
 			}
 			StringBuilder filter = new StringBuilder();
-			if (filtro.TxIdPresente != null ) {
-				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente);
+			if (filtro.TxIdPresente.HasValue) {
+				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente.Value);
 			}
 			if (filtro.TipoCob != null ) {
 				filter.Append("&tipoCob").Append("=").Append(filtro.TipoCob.ToString());

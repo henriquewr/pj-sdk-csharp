@@ -38,8 +38,8 @@ namespace Sdk.PixApi {
 			if (filtro.Cnpj != null ) {
 				filter.Append("&cnpj").Append("=").Append(filtro.Cnpj);
 			}
-			if (filtro.LocationPresente != null ) {
-				filter.Append("&locationPresente").Append("=").Append(filtro.LocationPresente);
+			if (filtro.LocationPresente.HasValue) {
+				filter.Append("&locationPresente").Append("=").Append(filtro.LocationPresente.Value);
 			}
 			if (filtro.Status != null ) {
 				filter.Append("&status").Append("=").Append(filtro.Status.ToString());

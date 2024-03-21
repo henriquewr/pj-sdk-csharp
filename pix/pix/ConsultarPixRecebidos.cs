@@ -35,11 +35,11 @@ namespace Sdk.PixApi {
 			if (filtro.TxId != null ) {
 				filter.Append("&txId").Append("=").Append(filtro.TxId);
 			}
-			if (filtro.TxIdPresente != null ) {
-				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente);
+			if (filtro.TxIdPresente.HasValue) {
+				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente.Value);
 			}
-			if (filtro.DevolucaoPresente != null ) {
-				filter.Append("&devolucaoPresente").Append("=").Append(filtro.DevolucaoPresente);
+			if (filtro.DevolucaoPresente.HasValue) {
+				filter.Append("&devolucaoPresente").Append("=").Append(filtro.DevolucaoPresente.Value);
 			}
 			if (filtro.Cpf != null ) {
 				filter.Append("&cpf").Append("=").Append(filtro.Cpf);
@@ -47,9 +47,7 @@ namespace Sdk.PixApi {
 			if (filtro.Cnpj != null ) {
 				filter.Append("&cnpj").Append("=").Append(filtro.Cnpj);
 			}
-			if (filtro.TxId != null ) {
-				filter.Append("&txId").Append("=").Append(filtro.TxId);
-			}
+
 			return filter.ToString();
 		}
 

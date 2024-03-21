@@ -9,9 +9,9 @@ namespace Sdk.PixApi {
 		[DataMember(Name="txId", EmitDefaultValue = false)]
 		public string TxId;
 		[DataMember(Name="txIdPresente", EmitDefaultValue = false)]
-		public bool TxIdPresente;
+		public bool? TxIdPresente;
 		[DataMember(Name="devolucaoPresente", EmitDefaultValue = false)]
-		public bool DevolucaoPresente;
+		public bool? DevolucaoPresente;
 		[DataMember(Name="cpf", EmitDefaultValue = false)]
 		public string Cpf;
 		[DataMember(Name="cnpj", EmitDefaultValue = false)]
@@ -30,12 +30,12 @@ namespace Sdk.PixApi {
 			return this;
 		}
 
-		public FiltroConsultarPixRecebidos SetTxIdPresente(bool txIdPresente) {
+		public FiltroConsultarPixRecebidos SetTxIdPresente(bool? txIdPresente) {
 			this.TxIdPresente = txIdPresente;
 			return this;
 		}
 
-		public FiltroConsultarPixRecebidos SetDevolucaoPresente(bool devolucaoPresente) {
+		public FiltroConsultarPixRecebidos SetDevolucaoPresente(bool? devolucaoPresente) {
 			this.DevolucaoPresente = devolucaoPresente;
 			return this;
 		}

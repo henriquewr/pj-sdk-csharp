@@ -7,7 +7,7 @@ namespace Sdk.PixApi {
 	[DataContract]
 	public class FiltroConsultarLocations {
 		[DataMember(Name="txIdPresente", EmitDefaultValue = false)]
-		public bool TxIdPresente;
+		public bool? TxIdPresente;
 		[DataMember(Name="tipoCob", EmitDefaultValue = false)]
 		public string TipoCob;
 
@@ -19,7 +19,7 @@ namespace Sdk.PixApi {
 			return this;
 		}
 
-		public FiltroConsultarLocations SetTxIdPresente(bool txIdPresente) {
+		public FiltroConsultarLocations SetTxIdPresente(bool? txIdPresente) {
 			this.TxIdPresente = txIdPresente;
 			return this;
 		}

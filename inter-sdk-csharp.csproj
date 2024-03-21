@@ -5,6 +5,8 @@
     <RootNamespace>inter_sdk_csharp</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyVersion>2024.3.21.1</AssemblyVersion>
+    <FileVersion>2024.3.21.1</FileVersion>
   </PropertyGroup>
 
 </Project>
