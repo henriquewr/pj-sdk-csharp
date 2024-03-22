@@ -22,7 +22,7 @@ namespace Sdk.PixApi {
 		}
 
 		public PaginaLocations GetPage(Config config, string dataInicial, string dataFinal, int pagina, int tamanhoPagina, FiltroConsultarLocations filtro) {
-			string url = Constants.URL_PIX_LOCATIONS.Replace("AMBIENTE", config.Ambiente) + "?inicio=" + dataInicial + "&fim=" + dataFinal + "&paginacao.paginaAtual=" + pagina + SdkUtils.PrmTamanhoPagina(tamanhoPagina) + Addfilters(filtro);
+			string url = $"{Constants.URL_PIX_LOCATIONS.Replace("AMBIENTE", config.Ambiente)}?inicio={dataInicial}&fim={dataFinal}&paginacao.paginaAtual={pagina}{(tamanhoPagina == 0 ? "" : "&paginacao.itensPorPagina=" + tamanhoPagina)}{Addfilters(filtro)}";
 			string json = HttpUtils.CallGet(config, url, Constants.ESCOPO_LOCATION_READ, "Erro ao consultar locations");
 			return (PaginaLocations) SdkUtils.Deserialize(typeof(PaginaLocations), json);
 		}
@@ -33,13 +33,12 @@ namespace Sdk.PixApi {
 			}
 			StringBuilder filter = new StringBuilder();
 			if (filtro.TxIdPresente.HasValue) {
-				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente.Value);
+				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente.Value.ToString().ToLowerInvariant());
 			}
 			if (filtro.TipoCob != null ) {
 				filter.Append("&tipoCob").Append("=").Append(filtro.TipoCob.ToString());
 			}
 			return filter.ToString();
 		}
-
 	}
 }

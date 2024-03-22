@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>inter_sdk_csharp</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>2024.3.21.1</AssemblyVersion>
-    <FileVersion>2024.3.21.1</FileVersion>
+    <AssemblyVersion>2024.3.22.1</AssemblyVersion>
+    <FileVersion>2024.3.22.1</FileVersion>
   </PropertyGroup>
 
 </Project>

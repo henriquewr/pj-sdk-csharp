@@ -22,7 +22,7 @@ namespace Sdk.BankingApi {
 		}
 
 		public ExtratoEnriquecido GetPage(Config config, string dataInicial, string dataFinal, int pagina, int tamanhoPagina, FiltroConsultarExtratoEnriquecido filtro) {
-			string url = Constants.URL_BANKING_EXTRATO_ENRIQUECIDO.Replace("AMBIENTE", config.Ambiente) + "?dataInicio=" + dataInicial + "&dataFim=" + dataFinal + "&pagina=" + pagina + SdkUtils.PrmTamanhoPagina(tamanhoPagina) + Addfilters(filtro);
+			string url = $"{Constants.URL_BANKING_EXTRATO_ENRIQUECIDO.Replace("AMBIENTE", config.Ambiente)}?dataInicio={dataInicial}&dataFim={dataFinal}&pagina={pagina}{(tamanhoPagina == 0 ? "" : "&tamanhoPagina=" + tamanhoPagina)}{Addfilters(filtro)}";
 			string json = HttpUtils.CallGet(config, url, Constants.ESCOPO_EXTRATO_READ, "Erro ao consultar extrato enriquecido");
 			return (ExtratoEnriquecido) SdkUtils.Deserialize(typeof(ExtratoEnriquecido), json);
 		}

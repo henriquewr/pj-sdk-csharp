@@ -22,7 +22,7 @@ namespace Sdk.BankingApi {
 		}
 
 		public PaginaCallbacks GetPage(Config config, string tipo, string dataHoraInicio, string dataHoraFim, int pagina, int tamanhoPagina, FiltroBuscarCallbacks filtro) {
-			string url = Constants.URL_BANKING_WEBHOOK.Replace("AMBIENTE", config.Ambiente) + "/" + tipo + "/" + Constants.CALLBACKS + "?dataHoraInicio=" + dataHoraInicio + "&dataHoraFim=" + dataHoraFim + "&paginaAtual=" + pagina + SdkUtils.PrmTamanhoPagina(tamanhoPagina) + Addfilters(filtro);
+			string url = $"{Constants.URL_BANKING_WEBHOOK.Replace("AMBIENTE", config.Ambiente)}/{tipo}/{Constants.CALLBACKS}?dataHoraInicio={dataHoraInicio}&dataHoraFim={dataHoraFim}&paginaAtual={pagina}{(tamanhoPagina == 0 ? "" : "&itensPorPagina=" + tamanhoPagina)}{Addfilters(filtro)}";
 			string json = HttpUtils.CallGet(config, url, Constants.ESCOPO_WEBHOOK_BANKING_READ, "Erro ao recuperar callbacks");
 			return (PaginaCallbacks) SdkUtils.Deserialize(typeof(PaginaCallbacks), json);
 		}

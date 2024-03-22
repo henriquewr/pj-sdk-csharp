@@ -22,7 +22,7 @@ namespace Sdk.PixApi {
 		}
 
 		public PaginaPix GetPage(Config config, string dataInicial, string dataFinal, int pagina, int tamanhoPagina, FiltroConsultarPixRecebidos filtro) {
-			string url = Constants.URL_PIX_PIX.Replace("AMBIENTE", config.Ambiente) + "?inicio=" + dataInicial + "&fim=" + dataFinal + "&paginacao.paginaAtual=" + pagina + SdkUtils.PrmTamanhoPagina(tamanhoPagina) + Addfilters(filtro);
+			string url = $"{Constants.URL_PIX_PIX.Replace("AMBIENTE", config.Ambiente)}?inicio={dataInicial}&fim={dataFinal}&paginacao.paginaAtual={pagina}{(tamanhoPagina == 0 ? "" : "&paginacao.itensPorPagina=" + tamanhoPagina)}{Addfilters(filtro)}";
 			string json = HttpUtils.CallGet(config, url, Constants.ESCOPO_PIX_READ, "Erro ao consultar pix recebidos");
 			return (PaginaPix) SdkUtils.Deserialize(typeof(PaginaPix), json);
 		}
@@ -36,10 +36,10 @@ namespace Sdk.PixApi {
 				filter.Append("&txId").Append("=").Append(filtro.TxId);
 			}
 			if (filtro.TxIdPresente.HasValue) {
-				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente.Value);
+				filter.Append("&txIdPresente").Append("=").Append(filtro.TxIdPresente.Value.ToString().ToLowerInvariant());
 			}
 			if (filtro.DevolucaoPresente.HasValue) {
-				filter.Append("&devolucaoPresente").Append("=").Append(filtro.DevolucaoPresente.Value);
+				filter.Append("&devolucaoPresente").Append("=").Append(filtro.DevolucaoPresente.Value.ToString().ToLowerInvariant());
 			}
 			if (filtro.Cpf != null ) {
 				filter.Append("&cpf").Append("=").Append(filtro.Cpf);

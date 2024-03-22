@@ -1,5 +1,5 @@
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Sdk.CobrancaApi {
 	public class RecuperarBoletos {
@@ -22,7 +22,7 @@ namespace Sdk.CobrancaApi {
 		}
 
 		public PaginaBoletos GetPage(Config config, string dataInicial, string dataFinal, int pagina, int tamanhoPagina, FiltroRecuperarBoletos filtro, Ordenacao ordenacao) {
-			string url = Constants.URL_COBRANCA_BOLETOS.Replace("AMBIENTE", config.Ambiente) + "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&paginaAtual=" + pagina + SdkUtils.PrmTamanhoPagina(tamanhoPagina) + Addfilters(filtro) + AddSort(ordenacao);
+			string url = $"{Constants.URL_COBRANCA_BOLETOS.Replace("AMBIENTE", config.Ambiente)}?dataInicial={dataInicial}&dataFinal={dataFinal}&paginaAtual={pagina}{(tamanhoPagina == 0 ? "" : "&itensPorPagina=" + tamanhoPagina)}{Addfilters(filtro)}{AddSort(ordenacao)}";
 			string json = HttpUtils.CallGet(config, url, Constants.ESCOPO_BOLETO_COBRANCA_READ, "Erro ao recuperar boletos");
 			return (PaginaBoletos) SdkUtils.Deserialize(typeof(PaginaBoletos), json);
 		}

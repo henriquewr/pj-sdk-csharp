@@ -1,7 +1,5 @@
-using System;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Collections.Generic;
+using System.Text;
 
 namespace Sdk.BankingApi {
 	[DataContract]
@@ -30,8 +28,19 @@ namespace Sdk.BankingApi {
 		}
 
 		public string ObterFiltroQuery() {
-			string filter = "";
-			return filter;
+            StringBuilder filter = new StringBuilder();
+
+            if (TipoOperacao != null)
+            {
+                filter.Append("&tipoOperacao=").Append(TipoOperacao);
+            }
+
+            if (TipoTransacao != null)
+            {
+                filter.Append("&tipoTransacao=").Append(TipoTransacao);
+            }
+
+            return filter.ToString();
 		}
 	}
 }
