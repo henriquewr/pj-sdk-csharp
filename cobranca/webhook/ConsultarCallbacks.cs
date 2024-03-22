@@ -22,7 +22,7 @@ namespace Sdk.CobrancaApi {
 		}
 
 		public PaginaCallbacks GetPage(Config config, string dataHoraInicio, string dataHoraFim, int pagina, int tamanhoPagina, FiltroBuscarCallbacks filtro) {
-			string url = Constants.URL_COBRANCA_WEBHOOK_COBRANCA.Replace("AMBIENTE", config.Ambiente) + "/" + Constants.CALLBACKS + "?dataHoraInicio=" + dataHoraInicio + "&dataHoraFim=" + dataHoraFim + "&paginaAtual=" + pagina + SdkUtils.PrmTamanhoPagina(tamanhoPagina) + Addfilters(filtro);
+			string url = $"{Constants.URL_COBRANCA_WEBHOOK_COBRANCA.Replace("AMBIENTE", config.Ambiente)}/{Constants.CALLBACKS}?dataHoraInicio={dataHoraInicio}&dataHoraFim={dataHoraFim}&paginaAtual={pagina}{(tamanhoPagina == 0 ? "" : "&itensPorPagina=" + tamanhoPagina)}{Addfilters(filtro)}";
 			string json = HttpUtils.CallGet(config, url, Constants.ESCOPO_BOLETO_COBRANCA_READ, "Erro ao recuperar callbacks");
 			return (PaginaCallbacks) SdkUtils.Deserialize(typeof(PaginaCallbacks), json);
 		}
