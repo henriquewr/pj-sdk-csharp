@@ -14,6 +14,19 @@ namespace Sdk
         private PixSdk pix;
         private static string logFilePath;
 
+        private static SemaphoreSlim _semaphoreSlim;
+        private static SemaphoreSlim semaphore
+        {
+            get
+            {
+                if (_semaphoreSlim == null)
+                {
+                    _semaphoreSlim = new SemaphoreSlim(1);
+                }
+                return _semaphoreSlim;
+            }
+        }
+
         public static string GetVersion()
         {
             return "inter-sdk-csharp v1.0.0-2023-09-26";
@@ -124,13 +137,21 @@ namespace Sdk
             InterSdk.LogInfo("{0}", GetVersion());
         }
 
-        public static void LogInfo(string format, params string[] prms)
+        public static async Task LogInfo(string format, params string[] prms)
         {
-            using (StreamWriter log = new StreamWriter(logFilePath, true))
+            await semaphore.WaitAsync();
+            try
             {
-                string text = String.Format(format, prms);
-                string date = DateTime.Now.ToString();
-                log.WriteLine($"{date} {text}");
+                using (StreamWriter log = new StreamWriter(logFilePath, true))
+                {
+                    string text = String.Format(format, prms);
+                    string date = DateTime.Now.ToString();
+                    log.WriteLine($"{date} {text}");
+                }
+            }
+            finally
+            {
+                semaphore.Release();
             }
         }
 
